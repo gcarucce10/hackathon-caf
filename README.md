@@ -1,4 +1,4 @@
-# CAF - README
+# CAF Connect - README
 
 Breve descrição
 ---------------
