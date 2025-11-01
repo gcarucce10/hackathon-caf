@@ -1,0 +1,77 @@
+[
+  {
+    "id": "caf_prod_001",
+    "nome": "Moedor de Carne CAF Gourmet",
+    "desc": "Moedor de qualidade premium para uso doméstico e com um design incrível para produções artesanais."
+  },
+  {
+    "id": "caf_prod_002",
+    "nome": "Moedor de Carne CAF 8 Inox",
+    "desc": "Moedor compacto e versátil, possui capa e bandeja em aço inox. Ideal para uso doméstico, pequenos comércios, produção artesanal e charcutarias."
+  },
+  {
+    "id": "caf_prod_003",
+    "nome": "Moedor de Carne CAF 10 SM Inox Bivolt",
+    "desc": "Moedor robusto com um motor de 1/2CV, oferece moagem eficiente, ideal para pequenos açougues e restaurantes."
+  },
+  {
+    "id": "caf_prod_004",
+    "nome": "Moedor de Carne CAF 22 DSM Parcial Inox Bivolt",
+    "desc": "Este Moedor é o carro chef da CAF, oferecendo o melhor custo-benefício. Com um motor de 1,25CV é recomendado para açougues no atendimento ao cliente em balcão."
+  },
+  {
+    "id": "caf_prod_005",
+    "nome": "Moedor de Carne CAF 98 DSM 3CV Inox",
+    "desc": "Moedor robusto com motor de 3CV que oferece eficiência e alta produtividade em carnes mais pesadas com nervos e gorduras."
+  },
+  {
+    "id": "caf_prod_006",
+    "nome": "Moedor de Carne CAF 82 Express",
+    "desc": "Moedor inovador com moagem e remoagem em um só processo. Indicado para açougues e supermercados com grande fluxo de clientes pois oferece agilidade no atendimento e não exige habilidade do operador."
+  },
+  {
+    "id": "caf_prod_007",
+    "nome": "Moedor de Carne CAF 106 Total Inox",
+    "desc": "Moedor de Carne da linha industrial com um motor de 7,5CV que permite trabalhar com carne congelada em pedaços pequenos."
+  },
+  {
+    "id": "caf_prod_008",
+    "nome": "Moedor de Carne CAF 114 Total Inox",
+    "desc": "Moedor de Carne da linha industrial customizável. Com um motor de 10CV que permite trabalhar com carne congelada em pedaços pequenos, pode ser montado em duas configurações: corte duplo ou triplo."
+  },
+  {
+    "id": "caf_prod_009",
+    "nome": "Processador de Alimentos CAF PA 190 Inox",
+    "desc": "Processador em Inox para o processamento de alimentos em geral como verduras, legumes e frios."
+  },
+  {
+    "id": "caf_prod_010",
+    "nome": "Ensacadeira para Embutidos CAF E3 Total Inox Manual",
+    "desc": "Ensacadeira para Embutidos manual com capacidade de 3L/2Kg com toda estrutura e tubo em aço inox."
+  },
+  {
+    "id": "caf_prod_011",
+    "nome": "Ensacadeira para Embutidos CAF E8 Total Inox Manual",
+    "desc": "Ensacadeira para embutidos manual com capacidade de 8L/5kg com toda estrutura e tubo em aço inox com parede de 2mm."
+  },
+  {
+    "id": "caf_prod_012",
+    "nome": "Ensacadeira para Embutidos CAF E16 Total Inox Hidráulica",
+    "desc": "Ensacadeira para embutidos hidráulica com capacidade de 16L/13kg e produção de 6kg/min ou 360kg/hora em funil médio, com toda estrutura e tubo em aço inox e processo de embutimento via pedaleira de acionamento."
+  },
+  {
+    "id": "caf_prod_013",
+    "nome": "Moedor e Misturador CAF HG 22",
+    "desc": "Moedor e Misturador totalmente em aço inox 304 com caçamba de alimentação de até 15Kg."
+  },
+  {
+    "id": "caf_prod_014",
+    "nome": "Moedor e Misturador CAF HG 98",
+    "desc": "Moedor e Misturador totalmente em aço inox 304 com caçamba de alimentação de 30Kg e processo de moagem e remoagem de 450Kg/hora."
+  },
+  {
+    "id": "caf_prod_015",
+    "nome": "Moedor e Misturador CAF HG 80-98",
+    "desc": "Moedor e Misturador totalmente em aço inox 304 com caçamba de alimentação de até 50Kg e processo de moagem e remoagem de 1000Kg/hora."
+  }
+]

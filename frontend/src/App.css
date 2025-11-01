@@ -1,0 +1,170 @@
+/* --- VARIAVEIS DE COR DA MARCA --- */
+:root {
+  --cor-marca-caf: #d9232a; /* Vermelho oficial da CAF */
+  --cor-marca-dark: #b01c22;
+  --cor-fundo-gradiente: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  --cor-fundo-card: #ffffff;
+  --cor-texto-titulo: #212529;
+  --cor-texto-corpo: #495057;
+  --cor-texto-leve: #6c757d;
+  --cor-borda: #dee2e6;
+  --sombra-card: 0 12px 32px rgba(0, 0, 0, 0.07), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --sombra-botao: 0 4px 12px rgba(217, 35, 42, 0.25);
+}
+
+/* --- O WRAPPER QUE FORÇA A CENTRALIZAÇÃO --- */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  background: var(--cor-fundo-gradiente); /* Fundo com gradiente suave */
+  padding: 2rem;
+  box-sizing: border-box; /* Importante para o padding não estourar a tela */
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --- O CARD PRINCIPAL --- */
+.card-container {
+  background: var(--cor-fundo-card);
+  padding: 2.5rem 3rem 3rem 3rem;
+  border-radius: 20px; /* Mais arredondado */
+  box-shadow: var(--sombra-card);
+  width: 100%;
+  max-width: 750px; /* Mais largo */
+  text-align: center;
+  border: 1px solid #fff;
+}
+
+/* --- CABEÇALHO E TÍTULOS --- */
+.logo {
+  max-width: 160px; /* Um pouco maior */
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  color: var(--cor-texto-titulo);
+  font-weight: 700;
+  font-size: 2rem; /* Maior */
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.subtitulo {
+  color: var(--cor-texto-corpo);
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+/* --- CAIXA DE BUSCA --- */
+.search-box {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+#barraBusca {
+  flex-grow: 1;
+  padding: 1rem 1.25rem;
+  font-size: 1.1rem; 
+  border-radius: 12px;
+  border: 1px solid var(--cor-borda);
+  background: #f8f9fa;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02) inset;
+  color: var(--cor-texto-titulo);
+}
+
+#barraBusca:focus {
+  outline: none;
+  border-color: var(--cor-marca-caf);
+  background: var(--cor-fundo-card);
+  box-shadow: 0 0 0 4px rgba(217, 35, 42, 0.1); 
+}
+
+#botaoBusca {
+  padding: 1rem 1.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--cor-marca-caf); 
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+#botaoBusca:hover {
+  background-color: var(--cor-marca-dark); 
+  transform: translateY(-2px); 
+  box-shadow: var(--sombra-botao);
+}
+
+#botaoBusca:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* --- ÁREA DE RESULTADOS --- */
+#resultados {
+  margin-top: 2.5rem;
+  text-align: left;
+}
+
+.resultados-header {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cor-texto-leve);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.resultado-item {
+  background-color: #fdfdfd;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.resultado-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border-left: 4px solid var(--cor-marca-caf); 
+  padding-left: calc(1.5rem - 4px); 
+}
+
+.resultado-item h3 {
+  margin: 0 0 0.25rem 0;
+  color: var(--cor-marca-caf); 
+  font-size: 1.15rem;
+}
+
+.resultado-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--cor-texto-leve);
+  font-family: 'Menlo', 'Courier New', Courier, monospace;
+}
+
+.status-text {
+  color: var(--cor-texto-leve);
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+}
+.status-text.erro {
+  color: var(--cor-marca-caf); 
+  font-weight: 500;
+}
