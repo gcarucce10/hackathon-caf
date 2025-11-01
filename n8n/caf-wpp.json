@@ -1,0 +1,318 @@
+{
+  "name": "caf-wpp",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-incoming",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        1072,
+        192
+      ],
+      "id": "0fd37dc7-fc9b-4a54-b173-4a1ceae888a6",
+      "name": "Webhook",
+      "webhookId": "da72e303-0065-445f-9a57-3d57d0df60cf"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "phone",
+              "value": "={{ $json.body.phone || $json.body.data?.phone || $json.body.from }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "message_content",
+              "value": "={{ $json.body.text?.message || $json.body.message || $json.body.data?.message }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "sender_name",
+              "value": "={{ $json.body.senderName || $json.body.data?.senderName || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "message_id",
+              "value": "={{ $json.body.messageId || $json.body.data?.messageId || '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1296,
+        192
+      ],
+      "id": "cea35515-af2e-4256-994f-a62e1d1b38ee",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.z-api.io/instances/3E97EDA9A81931EB7D09CAE6335FD653/token/A4883A4DA159D829CDB9BDA4/send-text",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "client-token",
+              "value": "F4683de21a1da4fb5858cd63f58dc301cS"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "phone",
+              "value": "={{$json[\"phone\"]}}\n"
+            },
+            {
+              "name": "message",
+              "value": "={{ 'Olá, ' + $json.sender_name + '! 😊 Obrigado por entrar em contato com a CAF Máquinas. Recebemos sua mensagem. Para que possamos te atender melhor, por favor preencha este formulário: 👉 https://docs.google.com/forms/d/e/1FAIpQLSd1nIt5MuAZT15mxpBrhbXbRVyMPJxsWuaLO4KPKm3jyNKjKQ/viewform?usp=dialog' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1968,
+        192
+      ],
+      "id": "d654c6a8-8f33-491a-9185-a8146a60e1df",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1z3Xlk7vfK81mPDass2n5ARubgN8qZDRP6tsv2jeYHbA",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Active Conversations",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "a3575771-4aa1-43cc-9cc7-4138f1e9877f",
+      "name": "Check Active Conversations",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1520,
+        192
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Bs9GFdU1wd5A5yv2",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "id-1",
+              "leftValue": "={{ $input.all().length }}",
+              "rightValue": "0",
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "44fad139-9bdc-4e27-a72c-aff7d514732e",
+      "name": "Is New Conversation?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1744,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1z3Xlk7vfK81mPDass2n5ARubgN8qZDRP6tsv2jeYHbA",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Active Conversations",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sender_name",
+              "displayName": "sender_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "started_at",
+              "displayName": "started_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "9e57fa8f-3976-4ee2-8244-1b99f6888b67",
+      "name": "Register New Conversation",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2192,
+        192
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Bs9GFdU1wd5A5yv2",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Check Active Conversations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Active Conversations": {
+      "main": [
+        [
+          {
+            "node": "Is New Conversation?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is New Conversation?": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Register New Conversation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1b7b6fbc-e2b6-44b7-944c-198c72bd8450",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "23d262287e3b50ca6e5adb64bbc38bdd5428e37e64dd4a5bb855f261e070fac4"
+  },
+  "id": "nFXANeeuXokofmKF",
+  "tags": []
+}

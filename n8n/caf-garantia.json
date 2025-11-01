@@ -1,0 +1,165 @@
+{
+  "name": "caf-garantia",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fanback-unsqueezable-shaquana.ngrok-free.dev/api/tickets",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "client_name",
+              "value": "={{ $json.body.client_name }}"
+            },
+            {
+              "name": "client_contact",
+              "value": "={{ $json.body.client_contact }}"
+            },
+            {
+              "name": "raw_description",
+              "value": "={{ $json.body.raw_description }}"
+            },
+            {
+              "name": "nf_url",
+              "value": "={{ $json.body.nf_url }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "8ba5fe23-016d-4cc9-a947-9d9b9114a846",
+      "name": "1. Criar ticket"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4cd9a1b3-6dd7-4c1b-b3fa-35ca961b3aa5",
+              "leftValue": "={{ $node[\"1. Criar ticket\"].json.atendimento_tipo }}",
+              "rightValue": "Automático",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "c9a85f1e-c96c-40e3-b4e3-e0d0ffa1ce7c",
+      "name": "NF Anexada?"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "a6488941-61be-47af-819c-803e695f3ae1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ae2b5d99-9164-417b-b8c9-ed599b99e9f3",
+      "name": "Formulário foi respondido",
+      "webhookId": "a6488941-61be-47af-819c-803e695f3ae1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fanback-unsqueezable-shaquana.ngrok-free.dev/api/process-ocr",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "ticketId",
+              "value": "={{ $node[\"1. Criar ticket\"].json.ticketId }}"
+            },
+            {
+              "name": "nf_url",
+              "value": "={{ $node[\"Formulário foi respondido\"].json.body.nf_url }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        624,
+        -96
+      ],
+      "id": "8efe1ba2-c7c7-44cb-9210-ea60123eabc2",
+      "name": "2. Processar OCR"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "1. Criar ticket": {
+      "main": [
+        [
+          {
+            "node": "NF Anexada?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formulário foi respondido": {
+      "main": [
+        [
+          {
+            "node": "1. Criar ticket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NF Anexada?": {
+      "main": [
+        [
+          {
+            "node": "2. Processar OCR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a3f9dcba-0a0c-46ca-9e29-c984025bf639",
+  "meta": {
+    "instanceId": "23d262287e3b50ca6e5adb64bbc38bdd5428e37e64dd4a5bb855f261e070fac4"
+  },
+  "id": "k4U0j0OzEHaFfMYR",
+  "tags": []
+}
